@@ -32,14 +32,15 @@ export const ServerSocketEvent = {
   INITIALSTATUSREPLY: "initialStatusReply", // excludes state details
   STATUSREPLY: "statusReply", // reply to STATUSREQUEST by client containing game information
   // GAMEACTION: "gameAction", // action related to the context of the game itself
-  LOBBYUPDATE: "lobbyUpdate", // update to the status of the game lobby (e.g. a player joins/leaves a game)
+  LOBBYGAMEUPDATE: "lobbyGameUpdate",
+  // LOBBYUPDATE: "lobbyUpdate", // update to the status of the game lobby (e.g. a player joins/leaves a game)
   // LOBBYSTATEREPLY: "lobbyState", // message containing complete state of lobby
   // LOBBYGAMESTATEREPLY: "lobbyGameState", // message containing complete state of a lobby game
   // LOBBYUPDATESSUBSCRIBED: "lobbyUpdatesSubscribed", // confirmation that lobby updates room has been joined
   // LOBBYUPDATESUNSUBSCRIBED: "lobbyUpdatesUnsubscribed",
   CREATEGAMEOUTCOME: "createGameOutcome", // outcome of a create game request, enumerated in CreateGameOutcome
   // LEAVEGAMEOUTCOME: "leaveGameOutcome",
-  // JOINGAMEOUTCOME: "joinGameOutcome",
+  JOINGAMEOUTCOME: "joinGameOutcome",
   // GAMESTARTED: "gameStarted", // sent when the last player joins a lobby game and the game controller is created
   // // clients must request initial status update via GAMEACTION message
   // GAMEENDED: "gameEnded", // clients are notified of the start to a game via GAMEACTION messages
@@ -48,6 +49,7 @@ export const ServerSocketEvent = {
   // LOBBYGAMESTATEUPDATE: "lobbyGameStateUpdate"
   USEREXISTED: "usernameExisted",
   CONNECTSUCCESS: "connectSuccess",
+  LOBBYGAMESEATSUPDATE:"lobbyGameSeatsUpdate",
 };
 
 export const ClientSocketEvent = {
@@ -58,10 +60,10 @@ export const ClientSocketEvent = {
   // LOBBYGAMESTATEREQUEST: "lobbyGameStateRequest",
   // SUBSCRIBELOBBYUPDATES: "subscribeLobbyUpdates", // request to join lobby updates room
   UNSUBSCRIBELOBBYUPDATES: "unsubscribeLobbyUpdates",
-  // JOINGAME: "joinGame",
+  JOINGAME: "joinGame",
   CREATEGAME: "createGame",
   // LEAVEGAME: "leaveGame", // leave game in lobby before it has started. Currenlty no way to leave started games.
-  // LOBBYGAMECHATMESSAGE: "lobbyGameChatMessage"
+  LOBBYGAMETOGGLEASEAT: "lobbyGameToggleASeat",
 };
 
 export const CreateGameOutcome = {
@@ -75,14 +77,31 @@ export const CreateGameOutcome = {
   SUCCESS: "success",
 };
 
+export const LeaveGameOutcome = {
+  NOTINGAME: "notInGame",
+  GAMESTARTED: "gameStarted",
+  INTERNALERROR: "internalError",
+  SUCCESS: "success"
+}
+
+export const JoinGameOutcome = {
+  MISSINGINFO: "missingInfo",
+  ALREADYINGAME: "alreadyInGame",
+  GAMESTARTED: "gameStarted", // game started as a result of player joining
+  DOESNOTEXIST: "doesNotExist",
+  SUCCESS: "success",
+  INTERNALERROR: "internalError",
+  GAMEFULL: "gameFull",
+}
+
 export const StatusType = {
   INGAME: "inGame",
   INLOBBYGAME: "inLobbyGame",
   INLOBBY: "inLobby",
 };
 
-export const LobbyUpdate = {
-  GAMECREATED: "gameCreated",
+export const LobbyGameUpdate = {
+  // GAMECREATED: "gameCreated",
   PLAYERLEFT: "playerLeft",
   PLAYERJOINED: "playerJoined",
   GAMEDELETED: "gameDeleted",
